@@ -1,0 +1,74 @@
+﻿@model tesla.ViewModels.CarViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+@foreach (var item in Model.Car)
+{
+<div style="scroll-snap-align: start;
+    width:100%;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('@Url.Content(String.Format("~/Content/images/{0}/{1}", "cars", item.img))');
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;">
+    <div direction="up">
+        <div style="padding-top: 15vh;
+           text-align: center;">
+            <h1 class="text-4xl font-bold text-black">@item.title</h1>
+            <p>Order Online For Touchless Delivery</p>
+        </div>
+    </div>
+    <div>
+        <div direction="up">
+            <div id="home" style="   display: flex;align-items: center;
+              margin-bottom: 30px;
+            ">
+                <a href="@Url.Action("Details","Cars", new { id = item.id })">
+                    <div style="   background-color: rgba(23, 26, 32, 0.8);
+                    height: 40px;
+                    width: 256px;
+                    color: white;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 100px;
+                    opacity: 0.85;
+                    text-transform: uppercase;
+                    font-size: 12px;
+                    cursor: pointer;
+                    margin: 8px;" class=" hover:animate-bounce ">
+                        Custom Order
+                    </div>
+                </a>
+                <a href="@Url.Action("Index","Cars")">
+                    <div style=" background: white;
+                     height: 40px;
+                    width: 256px;
+                    color: #111;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 100px;
+                    opacity: 0.85;
+                    text-transform: uppercase;
+                    font-size: 12px;
+                    cursor: pointer;
+                    margin: 8px;" class=" hover:animate-bounce rounded-lg">
+                        Existing Inventory
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div style=" margin-top: 20px;
+              height: 40px;
+              animation: animateDown infinite 1.5s;
+              overflow-x: hidden;"
+             class="mx-auto cursor-pointer"
+             src="images/down-arrow.svg"></div>
+    </div>
+</div>
+}

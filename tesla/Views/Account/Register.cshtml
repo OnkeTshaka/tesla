@@ -1,0 +1,84 @@
+﻿@model tesla.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <a href="@Url.Action("Index","Home")">
+            <img src="~/Content/images/logo.svg" class="mx-auto w-32">
+        </a>
+        <h2 class="mt-6 text-center text-2xl font-extrabold text-gray-900">
+            Sign up to create your account
+        </h2>
+        <div class="mt-2 text-center text-sm text-gray-600">
+            <a href="@Url.Action("Login","Account")">
+                <p class="font-medium text-indigo-600 hover:text-indigo-500">
+                    login using existing account
+                </p>
+            </a>
+        </div>
+    </div>
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md"
+             onSubmit="">
+            <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                <div class="space-y-6">
+                    <div>
+                        @Html.LabelFor(m => m.UserName, new { @class = "block text-sm font-medium text-gray-700" })
+
+
+                        <div class="mt-1">
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" })
+                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-red-600" })
+                        </div>
+                    </div>
+                    <div>
+                        @Html.LabelFor(m => m.Email, new { @class = "block text-sm font-medium text-gray-700" })
+
+
+                        <div class="mt-1">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-red-600" })
+                        </div>
+                    </div>
+                    <div>
+                        @Html.LabelFor(m => m.Password, new { @class = "block text-sm font-medium text-gray-700" })
+
+
+                        <div class="mt-1">
+                            @Html.PasswordFor(m => m.Password, new { @class = "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-red-600" })
+                        </div>
+                    </div>
+                    <div>
+                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "block text-sm font-medium text-gray-700" })
+
+
+                        <div class="mt-1">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-red-600" })
+                        </div>
+                    </div>
+               
+                    <div>
+                        <button type="submit"
+                                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Sign up
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

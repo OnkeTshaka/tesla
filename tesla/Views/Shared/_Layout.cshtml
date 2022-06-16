@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - telsa</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div style=" overflow-y: auto;text-align: center;height: 100vh;">
+        <div style="min-height: 60px;position: fixed;display: flex;
+                align-items: center;justify-content: space-between;
+                padding: 0 20px;top: 0;left: 0;right: 0;z-index: 1;">
+            @if (Request.IsAuthenticated)
+            {
+
+            }
+            <a href="@Url.Action("Index","Home")">
+                <img src="~/Content/images/logo.svg">
+
+            </a>
+            <!-- Menu -->
+            <div id="Menu" class="flex gap-2" style="display: flex;justify-content: center;align-items: center;flex: 1;">
+                <h1 class="text-black bg-transparent rounded-lg px-2.5 py-1.5 hover:text-white hover:bg-gray-800 cursor-pointer hover:bg-opacity-30 transition-colors">
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        <a href="@Url.Action("Index","Cars")">
+                            Cars
+
+                        </a>
+                    }
+                </h1>
+                <span class="dropdown">
+
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="">Cart<b class="caret"></b></a>
+                    <ul class="dropdown-menu" style="width:600px;">
+
+                        @if (Session["cart"] != null)
+                        {
+                            foreach (CartItem item in (List<CartItem>)Session["cart"])
+                            {
+
+                                <li style="color:green;margin-left:10px;">
+                                    @item.Car.title (@item.Quantity)
+                                </li>
+                            }
+                        }
+                        <li class="divider"></li>
+                        <li>
+                            <a href="@Url.Action("CheckoutDetails","ShoppingCart")" style="background-color:#fff;">
+                                <span class="label label-danger" style="font-size:15px;margin-left:15px;">Checkout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </span>
+
+            </div>
+            @Html.Partial("_LoginPartial")
+
+
+        </div>
+        @RenderBody()
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

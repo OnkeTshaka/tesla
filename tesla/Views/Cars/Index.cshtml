@@ -1,0 +1,21 @@
+﻿@model IEnumerable<tesla.Models.Car>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<p class="mt-12">
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="mt-24 grid grid-cols-3 grid-auto-rows gap-2 mx-2">
+  
+@foreach (var item in Model) {
+    <div>
+        <a href="@Url.Action("Details","Cars", new { id = item.id })">
+            <img src="@Url.Content(String.Format("~/Content/images/{0}/{1}", "cars", item.img))" class="object-center object-cover" />
+            </a>
+</div>
+}
+
+</div>
