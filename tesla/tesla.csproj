@@ -437,6 +437,7 @@
     <Content Include="Views\Approvals\Edit.cshtml" />
     <Content Include="Views\Approvals\Index.cshtml" />
     <Content Include="Views\Shared\_CommentBox.cshtml" />
+    <Content Include="Views\ShoppingCart\Summary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

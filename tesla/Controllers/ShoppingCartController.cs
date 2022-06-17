@@ -20,7 +20,14 @@ namespace tesla.Controllers
         {
             return View();
         }
+        public PartialViewResult Summary(CartItem cart)
+        {
+            return PartialView(cart);
+        }
+     
+    
 
+      
         public ActionResult DecreaseQty(int productId)
         {
             Car product = db.Car.Find(productId);
