@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -40,7 +41,55 @@ namespace tesla.Controllers
         {
             return View();
         }
+        #region Refactored functions
+              public string GenerateRefCode()
+        {
+            Random randm = new Random();
+            string upr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            string downr = "abcdefghijklmnopqrstuvwxyz";
+            string digir = "1234567890";
+            char[] tno = new char[8];
+            int r1 = randm.Next(0, 25);
+            int r2 = randm.Next(0, 25);
+            int r3 = randm.Next(0, 9);
+            tno[0] = upr[r1];
+            tno[1] = downr[r2];
+            tno[2] = digir[r3];
+            r1 = randm.Next(0, 25);
+            r2 = randm.Next(0, 25);
+            r3 = randm.Next(0, 9);
+            tno[3] = upr[r2];
+            tno[4] = downr[r1];
+            tno[5] = digir[r3];
+            string t_no = new string(tno);
 
+            return new string(tno);
+        }
+
+        public void MyOrder(Order order)
+        {
+            List<CartItem> cartItems = (List<CartItem>)Session["cart"];
+            foreach (CartItem cart in cartItems)
+            {
+                OrderDetail orderDetail = new OrderDetail()
+                {
+                    OrderID  = order.OrderID,
+                    car_id = cart.Car.id,
+                    Quantity = cart.Quantity,
+                    Price = cart.Car.price
+                };
+                db.OrderDetails.Add(orderDetail);
+                db.SaveChanges();
+            }
+        }
+
+        public string Client(Order order)
+        {
+            string CurrentUserName = User.Identity.GetUserName();
+            order.CustomerName = CurrentUserName;
+            return CurrentUserName;
+        }
+        #endregion
         // POST: Orders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -48,14 +97,28 @@ namespace tesla.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "OrderID,CustomerName,CustomerPhone,CustomerEmail,CustomerAddress,Refcode,From,OrderDate,PaymentType,Status")] Order order)
         {
+
             if (ModelState.IsValid)
             {
+
+                order.Refcode = GenerateRefCode();
+                order.OrderDate = DateTime.Now;
+                Client(order);
+                order.From = "Berea Centre Road, Bulwer, Berea, South Africa";
+                if (order.Status == null)
+                {
+                    order.Status = "Pending";
+                }
+
+
                 db.Orders.Add(order);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                MyOrder(order);
 
-            return View(order);
+                Session.Remove("cart");
+                Session.Remove("count");
+            }
+                return RedirectToAction("Details", "Orders", new { id = order.OrderID });
         }
 
         // GET: Orders/Edit/5

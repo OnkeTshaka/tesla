@@ -40,7 +40,7 @@ namespace tesla.Controllers
         public ActionResult Create()
         {
             ViewBag.car_id = new SelectList(db.Car, "id", "title");
-            ViewBag.order_id = new SelectList(db.Orders, "OrderID", "CustomerName");
+            ViewBag.OrderID  = new SelectList(db.Orders, "OrderID", "CustomerName");
             return View();
         }
 
@@ -49,7 +49,7 @@ namespace tesla.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,order_id,car_id,Price,Quantity")] OrderDetail orderDetail)
+        public ActionResult Create([Bind(Include = "id,OrderID ,car_id,Price,Quantity")] OrderDetail orderDetail)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace tesla.Controllers
             }
 
             ViewBag.car_id = new SelectList(db.Car, "id", "title", orderDetail.car_id);
-            ViewBag.order_id = new SelectList(db.Orders, "OrderID", "CustomerName", orderDetail.order_id);
+            ViewBag.OrderID  = new SelectList(db.Orders, "OrderID", "CustomerName", orderDetail.OrderID );
             return View(orderDetail);
         }
 
@@ -76,7 +76,7 @@ namespace tesla.Controllers
                 return HttpNotFound();
             }
             ViewBag.car_id = new SelectList(db.Car, "id", "title", orderDetail.car_id);
-            ViewBag.order_id = new SelectList(db.Orders, "OrderID", "CustomerName", orderDetail.order_id);
+            ViewBag.OrderID  = new SelectList(db.Orders, "OrderID", "CustomerName", orderDetail.OrderID );
             return View(orderDetail);
         }
 
@@ -85,7 +85,7 @@ namespace tesla.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,order_id,car_id,Price,Quantity")] OrderDetail orderDetail)
+        public ActionResult Edit([Bind(Include = "id,OrderID ,car_id,Price,Quantity")] OrderDetail orderDetail)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace tesla.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.car_id = new SelectList(db.Car, "id", "title", orderDetail.car_id);
-            ViewBag.order_id = new SelectList(db.Orders, "OrderID", "CustomerName", orderDetail.order_id);
+            ViewBag.OrderID  = new SelectList(db.Orders, "OrderID", "CustomerName", orderDetail.OrderID );
             return View(orderDetail);
         }
 

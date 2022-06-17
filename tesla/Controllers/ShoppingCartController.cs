@@ -14,7 +14,7 @@ namespace tesla.Controllers
         public ActionResult Index()
         {
 
-            return RedirectToAction("Index", "Products");
+            return RedirectToAction("Index", "Cars");
         }
         public ActionResult CheckoutDetails()
         {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - telsa</title>
+    <title>@ViewBag.Title - tesla</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @RenderSection("Head", required: false)
@@ -33,29 +33,7 @@
                         </a>
                     }
                 </h1>
-                <span class="dropdown">
-
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="">Cart<b class="caret"></b></a>
-                    <ul class="dropdown-menu" style="width:600px;">
-
-                        @if (Session["cart"] != null)
-                        {
-                            foreach (CartItem item in (List<CartItem>)Session["cart"])
-                            {
-
-                                <li style="color:green;margin-left:10px;">
-                                    @item.Car.title (@item.Quantity)
-                                </li>
-                            }
-                        }
-                        <li class="divider"></li>
-                        <li>
-                            <a href="@Url.Action("CheckoutDetails","ShoppingCart")" style="background-color:#fff;">
-                                <span class="label label-danger" style="font-size:15px;margin-left:15px;">Checkout</span>
-                            </a>
-                        </li>
-                    </ul>
-                </span>
+               
 
             </div>
             @Html.Partial("_LoginPartial")

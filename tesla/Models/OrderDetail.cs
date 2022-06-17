@@ -9,7 +9,7 @@ namespace tesla.Models
         [Key, ScaffoldColumn(false), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
         [ForeignKey("Order")]
-        public int order_id { get; set; }
+        public int OrderID  { get; set; }
         [ForeignKey("Car")]
         public int car_id { get; set; }
         public decimal Price { get; set; }
