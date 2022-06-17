@@ -34,6 +34,21 @@ namespace tesla.Controllers
                 return HttpNotFound();
             }
             ViewBag.Stock = car.inStock ? "In Stock!" : "Out Of Stock!";
+            ViewBag.car_id = id.Value;
+
+            var ratings = db.Approval.Where(d => d.car_id.Equals(id.Value)).ToList();
+            if (ratings.Count() > 0)
+            {
+                var ratingSum = ratings.Sum(d => d.Rating.Value);
+                ViewBag.RatingSum = ratingSum;
+                var ratingCount = ratings.Count();
+                ViewBag.RatingCount = ratingCount;
+            }
+            else
+            {
+                ViewBag.RatingSum = 0;
+                ViewBag.RatingCount = 0;
+            }
             return View(car);
         }
 
@@ -48,7 +63,7 @@ namespace tesla.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,title,inStock,description,img,price,quanitity")] Car car, HttpPostedFileBase imageFile)
+        public ActionResult Create([Bind(Include = "id,title,inStock,description,img,price,quanitity,hightlights")] Car car, HttpPostedFileBase imageFile)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +104,7 @@ namespace tesla.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,title,inStock,description,img,price,quanitity")] Car car, HttpPostedFileBase imageFile)
+        public ActionResult Edit([Bind(Include = "id,title,inStock,description,img,price,quanitity,hightlights")] Car car, HttpPostedFileBase imageFile)
         {
             if (ModelState.IsValid)
             {

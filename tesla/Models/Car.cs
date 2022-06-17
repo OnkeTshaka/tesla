@@ -22,7 +22,7 @@ namespace tesla.Models
 
         public decimal price { get; set; }
 
-        //public string[] hightlights { get; set; }
+        public string hightlights { get; set; }
 
         public int quanitity { get; set; }
     }

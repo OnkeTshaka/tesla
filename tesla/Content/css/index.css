@@ -72,7 +72,7 @@ a {
         }
 
         .starFade{
-    background-image:url('/images/star-off.png');
+    background-image:url('/Content/images/star-off.png');
     min-width:30px;
     min-height:30px;
     display:inline-block;
@@ -81,7 +81,7 @@ a {
 }
 
 .starFadeN{
-    background-image:url('/images/star-off.png');
+    background-image:url('/Content/images/star-off.png');
     min-width:30px;
     min-height:30px;
     display:inline-block;
@@ -89,7 +89,7 @@ a {
 }
 
 .starGlow{
-    background-image:url('/images/star-on.png');
+    background-image:url('/Content/images/star-on.png');
     min-width:30px;
     min-height:30px;
     display:inline-block;
@@ -97,7 +97,7 @@ a {
       background-repeat:no-repeat;
 }
 .starGlowN{
-    background-image:url('/images/star-on.png');
+    background-image:url('/Content/images/star-on.png');
     min-width:30px;
     min-height:30px;
     display:inline-block;

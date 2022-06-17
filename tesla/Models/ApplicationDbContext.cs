@@ -14,6 +14,8 @@ namespace tesla.Models
         {
         }
         public virtual DbSet<Car> Car { get; set; }
+
+        public virtual DbSet<Approval> Approval { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public static ApplicationDbContext Create()
